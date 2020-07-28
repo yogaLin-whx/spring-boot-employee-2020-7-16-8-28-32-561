@@ -39,4 +39,9 @@ public class CompanyController {
         }
         return null;
     }
+
+    @PostMapping("/")
+    public  void  addCompany(@RequestBody Company company){
+        companyService.addCompany(company);
+    }
 }
