@@ -32,4 +32,8 @@ public class EmployeeService {
     public void deleteEmployeeById(int id) {
         employeeRepository.deleteEmployeeById(id);
     }
+
+    public List<Employee> pageQueryEmployees(int page, int pageSize) {
+        return employeeRepository.pageQueryEmployees(page, pageSize);
+    }
 }

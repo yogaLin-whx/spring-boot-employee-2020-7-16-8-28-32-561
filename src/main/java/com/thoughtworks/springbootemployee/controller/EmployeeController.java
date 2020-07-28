@@ -20,8 +20,13 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public List<Employee> getEmployees(){
-        return  employeeService.getEmployees();
+    public List<Employee> getEmployees(
+            @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize){
+        if (page != null && pageSize != null) {
+            return employeeService.pageQueryEmployees(page, pageSize);
+        }
+        return employeeService.getEmployees();
     }
 
     @GetMapping("/{id}")
@@ -37,15 +42,5 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public void deleteEmployeeById(@PathVariable("id")int id){
         employeeService.deleteEmployeeById(id);
-    }
-
-    @GetMapping()
-    public List<Employee> pageQueryEmployees(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
-        return employeeService.pageQueryEmployees(page, pageSize);
-    }
-
-    @GetMapping()
-    public List<Employee> getEmployeesByGender(@RequestParam("gender") String gender) {
-        return employeeService.getEmployeesByGender(gender);
     }
 }
