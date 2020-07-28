@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.repository;
 
 import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,5 +28,16 @@ public class CompanyRepository {
 
     public void addCompany(Company company) {
         companies.add(company);
+    }
+
+    public void updateCompanyById(int id, Company newCompany) {
+        for (Company company : companies) {
+            if (company.getId() == id) {
+                company.setId(newCompany.getId());
+                company.setCompanyName(newCompany.getCompanyName());
+                company.setEmployeesNumber(newCompany.getEmployeesNumber());
+                company.setEmployees(newCompany.getEmployees());
+            }
+        }
     }
 }

@@ -33,4 +33,8 @@ public class CompanyService {
     public void addCompany(Company company) {
         companyRepository.addCompany(company);
     }
+
+    public void updateCompanyById(int id, Company company) {
+        companyRepository.updateCompanyById(id, company);
+    }
 }
