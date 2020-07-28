@@ -22,9 +22,13 @@ public class EmployeeController {
     @GetMapping()
     public List<Employee> getEmployees(
             @RequestParam(value = "page", required = false) Integer page,
-            @RequestParam(value = "pageSize", required = false) Integer pageSize){
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "gender", required = false) String gender){
         if (page != null && pageSize != null) {
             return employeeService.pageQueryEmployees(page, pageSize);
+        }
+        if (gender != null) {
+            return employeeService.getEmployeesByGender(gender);
         }
         return employeeService.getEmployees();
     }

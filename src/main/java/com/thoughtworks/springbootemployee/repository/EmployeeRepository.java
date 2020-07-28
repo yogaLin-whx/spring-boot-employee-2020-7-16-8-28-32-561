@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class EmployeeRepository {
@@ -56,5 +57,9 @@ public class EmployeeRepository {
             pagedEmployees.add(employees.get(employeeNumber));
         }
         return pagedEmployees;
+    }
+
+    public List<Employee> getEmployeesByGender(String gender) {
+        return employees.stream().filter(employee -> employee.getGender().equals(gender)).collect(Collectors.toList());
     }
 }
