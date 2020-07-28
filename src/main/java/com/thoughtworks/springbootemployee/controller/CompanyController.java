@@ -15,11 +15,6 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping("/")
-    public List<Company> getCompanies(){
-        return  companyService.getCompanies();
-    }
-
     @GetMapping("/{id}")
     public Company getCompanyById(@PathVariable int id){
         return  companyService.getCompanyById(id);
@@ -32,15 +27,15 @@ public class CompanyController {
 
     @GetMapping()
     public List<Company> getCompaniesByPageAndPageSize(
-            @RequestParam("page")int page,
-            @RequestParam("pageSize")int pageSize){
-        if(page > 0 && pageSize > 0){
+            @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize){
+        if(page != null && pageSize != null){
             return  companyService.getCompaniesByPageAndPageSize(page,pageSize);
         }
-        return null;
+        return  companyService.getCompanies();
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public  void  addCompany(@RequestBody Company company){
         companyService.addCompany(company);
     }
