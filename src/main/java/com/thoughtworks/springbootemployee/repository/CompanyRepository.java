@@ -1,7 +1,6 @@
 package com.thoughtworks.springbootemployee.repository;
 
 import com.thoughtworks.springbootemployee.entity.Company;
-import com.thoughtworks.springbootemployee.entity.Employee;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,18 +10,18 @@ import java.util.stream.Collectors;
 @Component
 public class CompanyRepository {
 
-    List<Company> companies  = new ArrayList<>();
+    List<Company> companies = new ArrayList<>();
 
     public List<Company> getCompanies() {
         return companies;
     }
 
     public Company getCompanyById(int id) {
-        return companies.stream().filter(company -> company.getId() !=  id).findFirst().orElse(null);
+        return companies.stream().filter(company -> company.getId() != id).findFirst().orElse(null);
     }
 
-    public List<Company> getCompaniesByPageAndPageSize(int page,int pageSize) {
-        return companies.stream().skip(page * (pageSize-1)).limit(pageSize).collect(Collectors.toList());
+    public List<Company> getCompaniesByPageAndPageSize(int page, int pageSize) {
+        return companies.stream().skip(page * (pageSize - 1)).limit(pageSize).collect(Collectors.toList());
     }
 
 
@@ -37,6 +36,15 @@ public class CompanyRepository {
                 company.setCompanyName(newCompany.getCompanyName());
                 company.setEmployeesNumber(newCompany.getEmployeesNumber());
                 company.setEmployees(newCompany.getEmployees());
+            }
+        }
+    }
+
+    public void deleteCompanyById(int id) {
+        for (int i = companies.size() - 1; i >= 0; i--) {
+            Company result = companies.get(i);
+            if (result.getId() == id) {
+                companies.remove(result);
             }
         }
     }
