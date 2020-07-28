@@ -43,4 +43,9 @@ public class EmployeeController {
     public List<Employee> pageQueryEmployees(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
         return employeeService.pageQueryEmployees(page, pageSize);
     }
+
+    @GetMapping()
+    public List<Employee> getEmployeesByGender(@RequestParam("gender") String gender) {
+        return employeeService.getEmployeesByGender(gender);
+    }
 }
