@@ -17,7 +17,7 @@ public class CompanyRepository {
     }
 
     public Company getCompanyById(int id) {
-        return companies.stream().filter(company -> company.getId() != id).findFirst().orElse(null);
+        return companies.stream().filter(company -> company.getId() == id).findFirst().orElse(null);
     }
 
     public List<Company> getCompaniesByPageAndPageSize(int page, int pageSize) {
