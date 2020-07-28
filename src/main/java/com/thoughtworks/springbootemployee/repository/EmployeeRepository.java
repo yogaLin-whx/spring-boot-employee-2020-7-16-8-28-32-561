@@ -29,6 +29,7 @@ public class EmployeeRepository {
                 employee.setName(newEmployee.getName());
                 employee.setAge(newEmployee.getAge());
                 employee.setGender(newEmployee.getGender());
+                employee.setSalary(newEmployee.getSalary());
             }
         }
     }
