@@ -38,4 +38,9 @@ public class EmployeeController {
     public void deleteEmployeeById(@PathVariable("id")int id){
         employeeService.deleteEmployeeById(id);
     }
+
+    @GetMapping()
+    public List<Employee> pageQueryEmployees(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
+        return employeeService.pageQueryEmployees(page, pageSize);
+    }
 }
