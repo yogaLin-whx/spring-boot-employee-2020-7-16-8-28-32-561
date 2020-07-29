@@ -4,6 +4,9 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import com.thoughtworks.springbootemployee.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +24,8 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public List<Employee> getEmployees(
-            @RequestParam(value = "page", required = false) Integer page,
-            @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "gender", required = false) String gender){
-        if (page != null && pageSize != null) {
-            return employeeService.pageQueryEmployees(page, pageSize);
-        }
-        if (gender != null) {
-            return employeeService.getEmployeesByGender(gender);
-        }
-        return employeeService.getEmployees();
+    public List<Employee> getEmployees(@PageableDefault(size = 2) Pageable pageable){
+        return employeeService.getEmployees(pageable).getContent();
     }
 
     @GetMapping("/{id}")
