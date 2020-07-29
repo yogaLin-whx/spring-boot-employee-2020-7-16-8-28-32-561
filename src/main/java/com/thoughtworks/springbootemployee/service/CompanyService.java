@@ -13,12 +13,10 @@ import java.util.List;
 public interface CompanyService {
 
     Page<Company> getCompanies(Pageable pageable);
-//
-//    Company getCompanyById(int id);
-//
-//    List<Company> getCompaniesByPageAndPageSize(int page,int pageSize);
-//
-//    List<Employee> getEmployeeOfCompany(int id);
+
+    List<Company> getCompanyById(int id);
+
+    List<Employee> getEmployeeOfCompany(int id);
 //
 //    void addCompany(Company company);
 //

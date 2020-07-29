@@ -18,16 +18,16 @@ public class CompanyController {
     @Autowired
     private CompanyServiceImpl companyService;
 
-//    @GetMapping("/{id}")
-//    public Company getCompanyById(@PathVariable int id){
-//        return  companyService.getCompanyById(id);
-//    }
-//
-//    @GetMapping("/{id}/employees")
-//    public List<Employee>  getEmployeesOfCompany(@PathVariable int id){
-//        return  companyService.getEmployeeOfCompany(id);
-//    }
-//
+    @GetMapping("/{id}")
+    public List<Company> getCompanyById(@PathVariable int id){
+        return  companyService.getCompanyById(id);
+    }
+
+    @GetMapping("/{id}/employees")
+    public List<Employee>  getEmployeesOfCompany(@PathVariable int id){
+        return  companyService.getEmployeeOfCompany(id);
+    }
+
     @GetMapping()
     public List<Company> getCompanies(@PageableDefault(size = 1) Pageable pageable){
         return  companyService.getCompanies(pageable).getContent();

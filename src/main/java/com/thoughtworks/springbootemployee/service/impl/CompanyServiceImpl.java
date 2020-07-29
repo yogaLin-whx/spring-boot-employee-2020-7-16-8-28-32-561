@@ -9,29 +9,31 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
-//
+
     public Page<Company> getCompanies(Pageable pageable) {
         return companyRepository.findAll(pageable);
     }
-//
-//    public Company getCompanyById(int id) {
-//        return  companyRepository.getCompanyById(id);
-//    }
-//
-//    public List<Company> getCompaniesByPageAndPageSize(int page,int pageSize){
-//        return  companyRepository.getCompaniesByPageAndPageSize(page,pageSize);
-//    }
-//
-//    public List<Employee> getEmployeeOfCompany(int id) {
-//        return companyRepository.getCompanyById(id).getEmployees();
-//    }
+
+    public List<Company> getCompanyById(int id) {
+        return  companyRepository.findAllById(Collections.singleton(id));
+    }
+
+    public List<Employee> getEmployeeOfCompany(int id) {
+        return companyRepository.findAllById(Collections.singleton(id))
+                .stream()
+                .map(Company::getEmployees)
+                .findFirst().get();
+    }
 //
 //    public void addCompany(Company company) {
 //        companyRepository.addCompany(company);
