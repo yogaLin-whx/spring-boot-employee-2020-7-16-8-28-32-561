@@ -24,7 +24,11 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public List<Employee> getEmployees(@PageableDefault Pageable pageable){
+    public List<Employee> getEmployees(@PageableDefault Pageable pageable,
+                                       @RequestParam(value = "gender", required = false) String gender){
+        if (gender != null) {
+            return employeeService.getEmployeesByGender(gender);
+        }
         return employeeService.getEmployees(pageable).getContent();
     }
 

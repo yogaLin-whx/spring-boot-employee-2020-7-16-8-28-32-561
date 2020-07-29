@@ -38,6 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public List<Employee> getEmployeesByGender(String gender) {
-        return null;
+        return employeeRepository.findByGender(gender);
     }
 }
