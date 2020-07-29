@@ -8,37 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class CompanyService {
+public interface CompanyService {
 
-    @Autowired
-    CompanyRepository companyRepository;
+    List<Company> getCompanies();
 
-    public List<Company> getCompanies() {
-        return  companyRepository.getCompanies();
-    }
+    Company getCompanyById(int id);
 
-    public Company getCompanyById(int id) {
-        return  companyRepository.getCompanyById(id);
-    }
+    List<Company> getCompaniesByPageAndPageSize(int page,int pageSize);
 
-    public List<Company> getCompaniesByPageAndPageSize(int page,int pageSize){
-        return  companyRepository.getCompaniesByPageAndPageSize(page,pageSize);
-    }
+    List<Employee> getEmployeeOfCompany(int id);
 
-    public List<Employee> getEmployeeOfCompany(int id) {
-        return companyRepository.getCompanyById(id).getEmployees();
-    }
+    void addCompany(Company company);
 
-    public void addCompany(Company company) {
-        companyRepository.addCompany(company);
-    }
+    void updateCompanyById(int id, Company company);
 
-    public void updateCompanyById(int id, Company company) {
-        companyRepository.updateCompanyById(id, company);
-    }
-
-    public void deleteCompanyById(int id) {
-        companyRepository.deleteCompanyById(id);
-    }
+    void deleteCompanyById(int id);
 }
