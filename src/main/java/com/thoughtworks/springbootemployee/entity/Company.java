@@ -1,5 +1,7 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Company {
     @Column(name = "company_id")
     private int id;
     private String name;
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "company_id")
     private List<Employee> employees;

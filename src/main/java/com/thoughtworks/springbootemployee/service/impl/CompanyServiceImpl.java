@@ -46,6 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public void addCompany(Company company) {
+
         companyRepository.save(company);
     }
 
