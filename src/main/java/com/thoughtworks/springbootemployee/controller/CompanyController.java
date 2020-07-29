@@ -2,7 +2,6 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.service.CompanyService;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -29,20 +28,20 @@ public class CompanyController {
     }
 
     @GetMapping()
-    public List<Company> getCompanies(@PageableDefault(size = 1) Pageable pageable){
+    public List<Company> getCompanies(@PageableDefault Pageable pageable){
         return  companyService.getCompanies(pageable).getContent();
     }
-//
-//    @PostMapping()
-//    public  void  addCompany(@RequestBody Company company){
-//        companyService.addCompany(company);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public void updateCompanyById(@PathVariable int id, @RequestBody Company company) {
-//        companyService.updateCompanyById(id, company);
-//    }
-//
+
+    @PostMapping()
+    public  void  addCompany(@RequestBody Company company){
+        companyService.addCompany(company);
+    }
+
+    @PutMapping()
+    public void updateCompanyById(@RequestBody Company company) {
+        companyService.updateCompany(company);
+    }
+
 //    @DeleteMapping("/{id}")
 //    public void deleteCompanyById(@PathVariable int id) {
 //        companyService.deleteCompanyById(id);

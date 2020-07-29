@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -34,15 +32,15 @@ public class CompanyServiceImpl implements CompanyService {
                 .map(Company::getEmployees)
                 .findFirst().get();
     }
-//
-//    public void addCompany(Company company) {
-//        companyRepository.addCompany(company);
-//    }
-//
-//    public void updateCompanyById(int id, Company company) {
-//        companyRepository.updateCompanyById(id, company);
-//    }
-//
+
+    public void addCompany(Company company) {
+        companyRepository.save(company);
+    }
+
+    public void updateCompany(Company company) {
+        companyRepository.save(company);
+    }
+
 //    public void deleteCompanyById(int id) {
 //        companyRepository.deleteCompanyById(id);
 //    }

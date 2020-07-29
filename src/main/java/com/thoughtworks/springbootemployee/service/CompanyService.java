@@ -17,10 +17,10 @@ public interface CompanyService {
     List<Company> getCompanyById(int id);
 
     List<Employee> getEmployeeOfCompany(int id);
-//
-//    void addCompany(Company company);
-//
-//    void updateCompanyById(int id, Company company);
-//
+
+    void addCompany(Company company);
+
+    void updateCompany(Company company);
+
 //    void deleteCompanyById(int id);
 }
