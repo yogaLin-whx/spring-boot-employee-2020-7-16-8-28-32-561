@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTest {
@@ -68,5 +69,18 @@ public class CompanyServiceTest {
 
         //then
         assertEquals(company, companyResult);
+    }
+
+    @Test
+    void should_return_0companies_when_get_company_by_id_given_company_id1_and_companies_do_not_have_company_with_id1() {
+        //given
+        int companyId = 1;
+        Mockito.when(companyRepository.getCompanyById(companyId)).thenReturn(null);
+
+        //when
+        Company companyResult = companyService.getCompanyById(companyId);
+
+        //then
+        assertNull(companyResult);
     }
 }
