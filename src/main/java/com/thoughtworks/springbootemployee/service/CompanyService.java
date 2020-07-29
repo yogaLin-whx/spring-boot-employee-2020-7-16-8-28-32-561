@@ -11,16 +11,16 @@ import java.util.List;
 public interface CompanyService {
 
     List<Company> getCompanies();
-
-    Company getCompanyById(int id);
-
-    List<Company> getCompaniesByPageAndPageSize(int page,int pageSize);
-
-    List<Employee> getEmployeeOfCompany(int id);
-
-    void addCompany(Company company);
-
-    void updateCompanyById(int id, Company company);
-
-    void deleteCompanyById(int id);
+//
+//    Company getCompanyById(int id);
+//
+//    List<Company> getCompaniesByPageAndPageSize(int page,int pageSize);
+//
+//    List<Employee> getEmployeeOfCompany(int id);
+//
+//    void addCompany(Company company);
+//
+//    void updateCompanyById(int id, Company company);
+//
+//    void deleteCompanyById(int id);
 }

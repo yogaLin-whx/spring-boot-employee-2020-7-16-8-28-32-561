@@ -14,32 +14,32 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
-
+//
     public List<Company> getCompanies() {
-        return  companyRepository.getCompanies();
+        return  companyRepository.findAll();
     }
-
-    public Company getCompanyById(int id) {
-        return  companyRepository.getCompanyById(id);
-    }
-
-    public List<Company> getCompaniesByPageAndPageSize(int page,int pageSize){
-        return  companyRepository.getCompaniesByPageAndPageSize(page,pageSize);
-    }
-
-    public List<Employee> getEmployeeOfCompany(int id) {
-        return companyRepository.getCompanyById(id).getEmployees();
-    }
-
-    public void addCompany(Company company) {
-        companyRepository.addCompany(company);
-    }
-
-    public void updateCompanyById(int id, Company company) {
-        companyRepository.updateCompanyById(id, company);
-    }
-
-    public void deleteCompanyById(int id) {
-        companyRepository.deleteCompanyById(id);
-    }
+//
+//    public Company getCompanyById(int id) {
+//        return  companyRepository.getCompanyById(id);
+//    }
+//
+//    public List<Company> getCompaniesByPageAndPageSize(int page,int pageSize){
+//        return  companyRepository.getCompaniesByPageAndPageSize(page,pageSize);
+//    }
+//
+//    public List<Employee> getEmployeeOfCompany(int id) {
+//        return companyRepository.getCompanyById(id).getEmployees();
+//    }
+//
+//    public void addCompany(Company company) {
+//        companyRepository.addCompany(company);
+//    }
+//
+//    public void updateCompanyById(int id, Company company) {
+//        companyRepository.updateCompanyById(id, company);
+//    }
+//
+//    public void deleteCompanyById(int id) {
+//        companyRepository.deleteCompanyById(id);
+//    }
 }
