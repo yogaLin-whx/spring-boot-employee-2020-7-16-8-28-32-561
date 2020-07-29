@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class CompanyServiceImpl implements CompanyService {
                 .stream()
                 .map(Company::getEmployees)
                 .findAny()
-                .orElse(null);
+                .orElseThrow(CompanyNotFoundException::new);
     }
 
     public void addCompany(Company company) {
