@@ -5,6 +5,8 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 //
-    public List<Company> getCompanies() {
-        return  companyRepository.findAll();
+    public Page<Company> getCompanies(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 //
 //    public Company getCompanyById(int id) {
