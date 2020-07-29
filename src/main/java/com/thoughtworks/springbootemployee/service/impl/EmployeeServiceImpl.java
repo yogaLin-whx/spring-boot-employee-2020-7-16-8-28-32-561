@@ -30,11 +30,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void updateEmployeeById(int id, Employee employee) {
-        //employeeRepository.updateEmployeeById(id, employee);
+
     }
 
     public void deleteEmployeeById(int id) {
-        //employeeRepository.deleteEmployeeById(id);
+        employeeRepository.deleteById(id);
     }
 
     public List<Employee> pageQueryEmployees(int page, int pageSize) {
