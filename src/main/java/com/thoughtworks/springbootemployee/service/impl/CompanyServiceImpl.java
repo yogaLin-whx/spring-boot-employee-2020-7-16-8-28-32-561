@@ -19,6 +19,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    public List<Company> getCompanies() {
+        return companyRepository.findAll();
+    }
+
     public Page<Company> getCompanies(Pageable pageable) {
         return companyRepository.findAll(pageable);
     }

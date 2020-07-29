@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class CompanyServiceTest {
         for (int i = 0; i < 2; i++) {
             companies.add(new Company());
         }
-        Mockito.when(companyRepository.getCompanies()).thenReturn(companies);
+        Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
         List<Company> companiesResult = companyService.getCompanies();
