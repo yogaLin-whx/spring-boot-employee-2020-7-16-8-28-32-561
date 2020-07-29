@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,7 +50,7 @@ public class CompanyServiceTest {
     void should_return_0companies_when_get_companies_given_0companies() {
         //given
         List<Company> companies = new ArrayList<>();
-        Mockito.when(companyRepository.getCompanies()).thenReturn(companies);
+        Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
         List<Company> companiesResult = companyService.getCompanies();
@@ -59,28 +60,13 @@ public class CompanyServiceTest {
     }
 
     @Test
-    void should_return_1company_with_id1_when_get_company_by_id_given_company_id1_and_companies_have_company_with_id1() {
-        //given
-        int companyId = 1;
-        Company company = new Company();
-        company.setId(companyId);
-        Mockito.when(companyRepository.getCompanyById(companyId)).thenReturn(company);
-
-        //when
-        Company companyResult = companyService.getCompanyById(companyId);
-
-        //then
-        assertEquals(company, companyResult);
-    }
-
-    @Test
     void should_return_0companies_when_get_company_by_id_given_company_id1_and_companies_do_not_have_company_with_id1() {
         //given
         int companyId = 1;
-        Mockito.when(companyRepository.getCompanyById(companyId)).thenReturn(null);
+        Mockito.when(companyRepository.findAllById(Collections.singleton(companyId))).thenReturn(null);
 
         //when
-        Company companyResult = companyService.getCompanyById(companyId);
+        List<Company> companyResult = companyService.getCompanyById(companyId);
 
         //then
         assertNull(companyResult);
