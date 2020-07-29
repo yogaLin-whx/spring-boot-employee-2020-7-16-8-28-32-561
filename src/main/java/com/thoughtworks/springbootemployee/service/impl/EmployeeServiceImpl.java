@@ -15,30 +15,30 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public void addEmployee(Employee employee) {
-        employeeRepository.addEmployee(employee);
+        //employeeRepository.addEmployee(employee);
     }
 
     public List<Employee> getEmployees() {
-        return employeeRepository.getEmployees();
+        return employeeRepository.findAll();
     }
 
     public Employee getEmployeeById(int id) {
-        return employeeRepository.getEmployeeById(id);
+        return null;
     }
 
     public void updateEmployeeById(int id, Employee employee) {
-        employeeRepository.updateEmployeeById(id, employee);
+        //employeeRepository.updateEmployeeById(id, employee);
     }
 
     public void deleteEmployeeById(int id) {
-        employeeRepository.deleteEmployeeById(id);
+        //employeeRepository.deleteEmployeeById(id);
     }
 
     public List<Employee> pageQueryEmployees(int page, int pageSize) {
-        return employeeRepository.pageQueryEmployees(page, pageSize);
+        return null;
     }
 
     public List<Employee> getEmployeesByGender(String gender) {
-        return employeeRepository.getEmployeesByGender(gender);
+        return null;
     }
 }
