@@ -41,7 +41,7 @@ public class CompanyServiceImpl implements CompanyService {
         companyRepository.save(company);
     }
 
-//    public void deleteCompanyById(int id) {
-//        companyRepository.deleteCompanyById(id);
-//    }
+    public void deleteCompanyById(int id) {
+        companyRepository.deleteById(id);
+    }
 }
