@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee;
 
 import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
@@ -18,8 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTest {
@@ -70,5 +70,22 @@ public class CompanyServiceTest {
 
         //then
         assertNull(companyResult);
+    }
+
+    @Test
+    void should_return_employees_when_get_employee_of_company_given_company_id1() {
+        //given
+        int companyId = 1;
+        List<Company> companies = new ArrayList<>();
+        Company company = new Company();
+        company.setEmployees(new ArrayList<Employee>());
+        companies.add(company);
+        Mockito.when(companyRepository.findAllById(Collections.singleton(companyId))).thenReturn(companies);
+
+        //when
+        List<Employee> employees = companyService.getEmployeeOfCompany(companyId);
+
+        //then
+        assertNotNull(employees);
     }
 }
