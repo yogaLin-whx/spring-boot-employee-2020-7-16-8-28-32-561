@@ -8,18 +8,19 @@ import java.util.List;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int companyId;
+    @Column(name = "company_id")
+    private int id;
     private String name;
     @OneToMany
     @JoinColumn(name = "company_id")
     private List<Employee> employees;
 
-    public int getCompanyId() {
-        return companyId;
+    public int getId() {
+        return id;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

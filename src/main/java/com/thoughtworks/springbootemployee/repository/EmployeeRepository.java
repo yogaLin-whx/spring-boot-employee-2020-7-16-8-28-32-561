@@ -12,4 +12,6 @@ import java.util.stream.Collectors;
 @Repository
 public interface EmployeeRepository  extends JpaRepository<Employee,Integer> {
     List<Employee> findByGender(String gender);
+
+    void deleteByCompanyId(int id);
 }
