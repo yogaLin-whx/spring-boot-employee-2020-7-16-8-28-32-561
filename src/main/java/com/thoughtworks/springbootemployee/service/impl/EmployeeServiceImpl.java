@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public void addEmployee(Employee employee) {
-        //employeeRepository.addEmployee(employee);
+        employeeRepository.save(employee);
     }
 
     public List<Employee> getEmployees() {
