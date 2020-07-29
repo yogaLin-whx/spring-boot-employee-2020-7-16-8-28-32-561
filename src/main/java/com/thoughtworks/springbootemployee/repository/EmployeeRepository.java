@@ -45,18 +45,19 @@ public class EmployeeRepository {
     }
 
     public List<Employee> pageQueryEmployees(int page, int pageSize) {
-        List<Employee> pagedEmployees = new ArrayList<>();
-        int employeeFirstNumber = pageSize * (page - 1);
-        if (employees.size() - employeeFirstNumber <= 0) {
-            return null;
-        }
-        for (int employeeNumber = employeeFirstNumber; employeeNumber - employeeFirstNumber < pageSize; employeeNumber ++) {
-            if (employeeNumber >= employees.size()) {
-                break;
-            }
-            pagedEmployees.add(employees.get(employeeNumber));
-        }
-        return pagedEmployees;
+//        List<Employee> pagedEmployees = new ArrayList<>();
+//        int employeeFirstNumber = pageSize * (page - 1);
+//        if (employees.size() - employeeFirstNumber <= 0) {
+//            return null;
+//        }
+//        for (int employeeNumber = employeeFirstNumber; employeeNumber - employeeFirstNumber < pageSize; employeeNumber++) {
+//            if (employeeNumber >= employees.size()) {
+//                break;
+//            }
+//            pagedEmployees.add(employees.get(employeeNumber));
+//        }
+//        return pagedEmployees;
+        return employees.stream().skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
     }
 
     public List<Employee> getEmployeesByGender(String gender) {

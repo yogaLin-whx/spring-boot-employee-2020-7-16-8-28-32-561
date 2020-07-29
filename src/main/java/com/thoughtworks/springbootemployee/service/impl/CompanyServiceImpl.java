@@ -13,7 +13,7 @@ import java.util.List;
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
-    CompanyRepository companyRepository;
+    private CompanyRepository companyRepository;
 
     public List<Company> getCompanies() {
         return  companyRepository.getCompanies();

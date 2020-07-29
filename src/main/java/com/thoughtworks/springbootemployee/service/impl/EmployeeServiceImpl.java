@@ -12,7 +12,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     public void addEmployee(Employee employee) {
         employeeRepository.addEmployee(employee);

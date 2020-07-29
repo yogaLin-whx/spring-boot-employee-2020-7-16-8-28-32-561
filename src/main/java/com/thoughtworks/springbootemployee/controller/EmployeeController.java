@@ -13,7 +13,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    EmployeeServiceImpl employeeService;
+    private EmployeeServiceImpl employeeService;
 
     @PostMapping()
     public void addEmployee(@RequestBody Employee employee){
