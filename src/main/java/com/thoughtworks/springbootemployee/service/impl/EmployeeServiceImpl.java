@@ -29,16 +29,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAllById(Collections.singleton(id));
     }
 
-    public void updateEmployeeById(int id, Employee employee) {
-
+    public void updateEmployee(Employee employee) {
+        employeeRepository.save(employee);
     }
 
     public void deleteEmployeeById(int id) {
         employeeRepository.deleteById(id);
-    }
-
-    public List<Employee> pageQueryEmployees(int page, int pageSize) {
-        return null;
     }
 
     public List<Employee> getEmployeesByGender(String gender) {

@@ -33,9 +33,9 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
-    @PutMapping("/{id}")
-    public void updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
-        employeeService.updateEmployeeById(id, employee);
+    @PutMapping()
+    public void updateEmployeeById(@RequestBody Employee employee){
+        employeeService.updateEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
