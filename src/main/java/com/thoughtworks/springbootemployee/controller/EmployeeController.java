@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public List<Employee> getEmployees(@PageableDefault(size = 2) Pageable pageable){
+    public List<Employee> getEmployees(@PageableDefault Pageable pageable){
         return employeeService.getEmployees(pageable).getContent();
     }
 
