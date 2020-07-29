@@ -50,5 +50,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     public void deleteCompanyById(int id) {
         companyRepository.deleteById(id);
+
     }
 }
