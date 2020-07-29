@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -30,7 +31,8 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAllById(Collections.singleton(id))
                 .stream()
                 .map(Company::getEmployees)
-                .findFirst().get();
+                .findAny()
+                .orElse(null);
     }
 
     public void addCompany(Company company) {
