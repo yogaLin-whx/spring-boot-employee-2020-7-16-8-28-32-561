@@ -54,4 +54,19 @@ public class CompanyServiceTest {
         //then
         assertEquals(0, companiesResult.size());
     }
+
+    @Test
+    void should_return_1company_with_id1_when_get_company_by_id_given_company_id1_and_companies_have_company_with_id1() {
+        //given
+        int companyId = 1;
+        Company company = new Company();
+        company.setId(companyId);
+        Mockito.when(companyRepository.getCompanyById(companyId)).thenReturn(company);
+
+        //when
+        Company companyResult = companyService.getCompanyById(companyId);
+
+        //then
+        assertEquals(company, companyResult);
+    }
 }
