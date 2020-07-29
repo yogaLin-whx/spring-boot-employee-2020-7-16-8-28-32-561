@@ -6,6 +6,7 @@ import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,8 +23,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee getEmployeeById(int id) {
-        return null;
+    public List<Employee> getEmployeeById(int id) {
+        return employeeRepository.findAllById(Collections.singleton(id));
     }
 
     public void updateEmployeeById(int id, Employee employee) {
