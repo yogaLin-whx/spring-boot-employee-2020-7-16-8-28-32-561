@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
+import com.thoughtworks.springbootemployee.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    EmployeeService employeeService;
+    EmployeeServiceImpl employeeService;
 
     @PostMapping()
     public void addEmployee(@RequestBody Employee employee){

@@ -1,43 +1,22 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class EmployeeService {
+public interface EmployeeService {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+    void addEmployee(Employee employee);
 
-    public void addEmployee(Employee employee) {
-        employeeRepository.addEmployee(employee);
-    }
+    List<Employee> getEmployees();
 
-    public List<Employee> getEmployees() {
-        return employeeRepository.getEmployees();
-    }
+    Employee getEmployeeById(int id);
 
-    public Employee getEmployeeById(int id) {
-        return employeeRepository.getEmployeeById(id);
-    }
+    void updateEmployeeById(int id, Employee employee);
 
-    public void updateEmployeeById(int id, Employee employee) {
-        employeeRepository.updateEmployeeById(id, employee);
-    }
+    void deleteEmployeeById(int id);
 
-    public void deleteEmployeeById(int id) {
-        employeeRepository.deleteEmployeeById(id);
-    }
+    List<Employee> pageQueryEmployees(int page, int pageSize);
 
-    public List<Employee> pageQueryEmployees(int page, int pageSize) {
-        return employeeRepository.pageQueryEmployees(page, pageSize);
-    }
-
-    public List<Employee> getEmployeesByGender(String gender) {
-        return employeeRepository.getEmployeesByGender(gender);
-    }
+    List<Employee> getEmployeesByGender(String gender);
 }
