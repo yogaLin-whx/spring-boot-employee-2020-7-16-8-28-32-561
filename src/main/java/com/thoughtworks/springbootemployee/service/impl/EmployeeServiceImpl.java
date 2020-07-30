@@ -25,10 +25,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public void addEmployee(Employee employee) {
         employeeRepository.save(employee);
-        List<Company> companies = companyRepository.findAllById(Collections.singleton(employee.getCompany().getId()))
-                .stream()
-                .peek(company -> company.getEmployees().add(employee))
-                .collect(Collectors.toList());
+//        List<Company> companies = companyRepository.findAllById(Collections.singleton(employee.getCompany().getId()))
+//                .stream()
+//                .peek(company -> company.getEmployees().add(employee))
+//                .collect(Collectors.toList());
     }
 
     public Page<Employee> getEmployees(Pageable pageable) {

@@ -14,8 +14,7 @@ public class Company {
     private int id;
     private String name;
     @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "company_id")
+    @OneToMany(mappedBy = "company")
     private List<Employee> employees;
 
     public int getId() {
