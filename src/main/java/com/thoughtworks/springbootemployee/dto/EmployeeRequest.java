@@ -1,40 +1,22 @@
-package com.thoughtworks.springbootemployee.entity;
+package com.thoughtworks.springbootemployee.dto;
 
+public class EmployeeRequest {
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int age;
     private String gender;
+    private int companyId;
 
-    public Employee(String name, int age, String gender, Company company) {
+    public EmployeeRequest() {
+    }
+
+    public EmployeeRequest(int id, String name, int age, String gender, int companyId) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.company = company;
-    }
-
-    public Employee() {
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
+        this.companyId = companyId;
     }
 
     public int getId() {
@@ -67,5 +49,13 @@ public class Employee {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 }

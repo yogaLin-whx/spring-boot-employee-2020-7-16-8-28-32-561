@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.service.impl;
 
+import com.thoughtworks.springbootemployee.dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -23,13 +23,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    public void addEmployee(Employee employee) {
-        employeeRepository.save(employee);
-//        List<Company> companies = companyRepository.findAllById(Collections.singleton(employee.getCompany().getId()))
-//                .stream()
-//                .peek(company -> company.getEmployees().add(employee))
-//                .collect(Collectors.toList());
+    public Employee addEmployee(EmployeeRequest employeeRequest) {
+
+        Company company = companyRepository.findById(employeeRequest.getCompanyId()).get();
+        if(company != null){
+            return employeeRepository.save(new Employee(employeeRequest.getName(),employeeRequest.getAge(),employeeRequest.getGender(),company));
+        }
+        return null;
     }
+//
+//    public Employee addEmployee(Employee employee) {
+//        return employeeRepository.save(employee);
+//    }
+
 
     public Page<Employee> getEmployees(Pageable pageable) {
         return employeeRepository.findAll(pageable);

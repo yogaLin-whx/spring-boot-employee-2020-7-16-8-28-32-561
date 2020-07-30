@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import com.thoughtworks.springbootemployee.service.impl.EmployeeServiceImpl;
@@ -19,9 +20,13 @@ public class EmployeeController {
     private EmployeeServiceImpl employeeService;
 
     @PostMapping()
-    public void addEmployee(@RequestBody Employee employee){
-        employeeService.addEmployee(employee);
+    public Employee addEmployee(@RequestBody EmployeeRequest employeeRequest){
+        return employeeService.addEmployee(employeeRequest);
     }
+//    @PostMapping()
+//    public Employee addEmployee(@RequestBody Employee employee){
+//        return employeeService.addEmployee(employee);
+//    }
 
     @GetMapping()
     public List<Employee> getEmployees(@PageableDefault Pageable pageable,
