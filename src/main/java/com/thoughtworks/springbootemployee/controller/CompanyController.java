@@ -6,6 +6,7 @@ import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class CompanyController {
     }
 
     @PostMapping()
-    public  void  addCompany(@RequestBody Company company){
+    public  void  addCompany(@RequestBody @Validated Company company){
         companyService.addCompany(company);
     }
 
