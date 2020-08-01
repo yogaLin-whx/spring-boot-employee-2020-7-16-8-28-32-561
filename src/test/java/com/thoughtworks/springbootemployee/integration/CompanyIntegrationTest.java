@@ -40,7 +40,7 @@ public class CompanyIntegrationTest {
         companyRepository.save(new Company("ooocl"));
         mockMvc.perform(get("/companies"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("[0].name").value("ooocl"));
+                .andExpect(jsonPath("companies[0].name").value("ooocl"));
     }
 
     @Test
@@ -49,8 +49,8 @@ public class CompanyIntegrationTest {
         companyRepository.save(new Company("ooocl"));
         mockMvc.perform(get("/companies"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("[0].name").value("oocl"))
-                .andExpect(jsonPath("[1].name").value("ooocl"));
+                .andExpect(jsonPath("companies[0].name").value("oocl"))
+                .andExpect(jsonPath("companies[1].name").value("ooocl"));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class CompanyIntegrationTest {
         mockMvc.perform(post("/companies")
                 .contentType(MediaType.APPLICATION_JSON).content(companyJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("oodl"));
+                .andExpect(jsonPath("companies[0].name").value("oodl"));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class CompanyIntegrationTest {
         mockMvc.perform(put("/companies/" + company.getId())
                 .contentType(MediaType.APPLICATION_JSON).content(companyJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("oocl"));
+                .andExpect(jsonPath("companies[0].name").value("oocl"));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class CompanyIntegrationTest {
 
         mockMvc.perform(get("/companies/" + company.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("[0].name").value("oodl"));
+                .andExpect(jsonPath("companies[0].name").value("oodl"));
     }
 
 

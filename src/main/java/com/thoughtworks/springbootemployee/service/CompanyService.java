@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface CompanyService {
 
-    List<CompanyResponse> getCompanies(Pageable pageable);
+    CompanyResponse getCompanies(Pageable pageable);
 
-    List<CompanyResponse> getCompanyById(int id);
+    CompanyResponse getCompanyById(int id);
 
     List<Employee> getEmployeeOfCompany(int id);
 

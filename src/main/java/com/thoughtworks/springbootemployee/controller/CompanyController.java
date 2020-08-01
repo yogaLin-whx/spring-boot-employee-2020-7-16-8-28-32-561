@@ -2,7 +2,6 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.dto.CompanyRequest;
 import com.thoughtworks.springbootemployee.dto.CompanyResponse;
-import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class CompanyController {
     private CompanyServiceImpl companyService;
 
     @GetMapping("/{id}")
-    public List<CompanyResponse> getCompanyById(@PathVariable int id){
+    public CompanyResponse getCompanyById(@PathVariable int id){
         return  companyService.getCompanyById(id);
     }
 
@@ -30,7 +29,7 @@ public class CompanyController {
     }
 
     @GetMapping()
-    public List<CompanyResponse> getCompanies(@PageableDefault Pageable pageable,
+    public CompanyResponse getCompanies(@PageableDefault Pageable pageable,
                                       @RequestParam(required = false, defaultValue = "false") boolean unpaged){
         if (unpaged) {
             return companyService.getCompanies();

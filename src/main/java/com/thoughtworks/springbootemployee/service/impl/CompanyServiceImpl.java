@@ -27,29 +27,28 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public List<CompanyResponse> getCompanies() {
-        return companyRepository.findAll().stream().map(company -> {
-            CompanyResponse companyResponse = new CompanyResponse();
-            BeanUtils.copyProperties(company,companyResponse);
-            return companyResponse;
-        }).collect(Collectors.toList());
+    public CompanyResponse getCompanies() {
+        List<Company> companies = companyRepository.findAll();
+        CompanyResponse companyResponse = new CompanyResponse();
+        companies.stream().forEach(company -> companyResponse.getCompanies().add(company));
+        return companyResponse;
     }
 
-    public List<CompanyResponse> getCompanies(Pageable pageable) {
-        return companyRepository.findAll(pageable).toList().stream().map(company -> {
-            CompanyResponse companyResponse = new CompanyResponse();
-            BeanUtils.copyProperties(company,companyResponse);
-            return companyResponse;
-        }).collect(Collectors.toList());
+
+    public CompanyResponse getCompanies(Pageable pageable) {
+        List<Company> companies = companyRepository.findAll(pageable).toList();
+        CompanyResponse companyResponse = new CompanyResponse();
+        companies.stream().forEach(company -> companyResponse.getCompanies().add(company));
+        return companyResponse;
     }
 
-    public List<CompanyResponse> getCompanyById(int id) {
+    public CompanyResponse getCompanyById(int id) {
         List<Company> companies =  companyRepository.findAllById(Collections.singleton(id));
-        return companies.stream().map(company -> {
-            CompanyResponse companyResponse = new CompanyResponse();
-            BeanUtils.copyProperties(company,companyResponse);
-            return companyResponse;
-        }).collect(Collectors.toList());
+        CompanyResponse companyResponse = new CompanyResponse();
+        if(companies != null){
+            companies.forEach(company -> companyResponse.getCompanies().add(company));
+        }
+        return companyResponse;
     }
 
     public List<Employee> getEmployeeOfCompany(int id) {
@@ -65,7 +64,7 @@ public class CompanyServiceImpl implements CompanyService {
         BeanUtils.copyProperties(companyRequest,company);
         company = companyRepository.save(company);
         CompanyResponse companyResponse = new CompanyResponse();
-        BeanUtils.copyProperties(company,companyResponse);
+        companyResponse.getCompanies().add(company);
         return companyResponse;
     }
 
@@ -75,7 +74,7 @@ public class CompanyServiceImpl implements CompanyService {
         BeanUtils.copyProperties(companyRequest,company);
         company = companyRepository.save(company);
         CompanyResponse companyResponse = new CompanyResponse();
-        BeanUtils.copyProperties(company,companyResponse);
+        companyResponse.getCompanies().add(company);
         return companyResponse;
     }
 
