@@ -78,6 +78,17 @@ public class CompanyIntegrationTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void should_return_company_with_same_id_when_find_company_by_id_given_company_with_id_and_exist_company() throws Exception {
+        Company  company = new Company();
+        company.setName("oodl");
+        companyRepository.save(company);
+
+        mockMvc.perform(get("/companies/" + company.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].id").value(company.getId()));
+    }
+
 
 
 }
