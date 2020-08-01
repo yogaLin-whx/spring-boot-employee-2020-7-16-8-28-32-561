@@ -13,7 +13,7 @@ public interface CompanyService {
 
     Page<Company> getCompanies(Pageable pageable);
 
-    List<Company> getCompanyById(int id);
+    List<CompanyResponse> getCompanyById(int id);
 
     List<Employee> getEmployeeOfCompany(int id);
 

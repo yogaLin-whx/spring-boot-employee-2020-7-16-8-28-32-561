@@ -35,8 +35,13 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAll(pageable);
     }
 
-    public List<Company> getCompanyById(int id) {
-        return  companyRepository.findAllById(Collections.singleton(id));
+    public List<CompanyResponse> getCompanyById(int id) {
+        List<Company> companies =  companyRepository.findAllById(Collections.singleton(id));
+        return companies.stream().map(company -> {
+            CompanyResponse companyResponse = new CompanyResponse();
+            BeanUtils.copyProperties(company,companyResponse);
+            return companyResponse;
+        }).collect(Collectors.toList());
     }
 
     public List<Employee> getEmployeeOfCompany(int id) {

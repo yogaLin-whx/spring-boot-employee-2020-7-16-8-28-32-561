@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee;
 
+import com.thoughtworks.springbootemployee.dto.CompanyResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
@@ -62,7 +63,7 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAllById(Collections.singleton(companyId))).thenReturn(null);
 
         //when
-        List<Company> companyResult = companyService.getCompanyById(companyId);
+        List<CompanyResponse> companyResult = companyService.getCompanyById(companyId);
 
         //then
         assertNull(companyResult);

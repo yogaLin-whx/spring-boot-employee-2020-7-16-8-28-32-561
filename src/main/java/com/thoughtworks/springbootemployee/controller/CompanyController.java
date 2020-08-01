@@ -20,7 +20,7 @@ public class CompanyController {
     private CompanyServiceImpl companyService;
 
     @GetMapping("/{id}")
-    public List<Company> getCompanyById(@PathVariable int id){
+    public List<CompanyResponse> getCompanyById(@PathVariable int id){
         return  companyService.getCompanyById(id);
     }
 

@@ -86,7 +86,7 @@ public class CompanyIntegrationTest {
 
         mockMvc.perform(get("/companies/" + company.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("[0].id").value(company.getId()));
+                .andExpect(jsonPath("[0].name").value("oodl"));
     }
 
 
