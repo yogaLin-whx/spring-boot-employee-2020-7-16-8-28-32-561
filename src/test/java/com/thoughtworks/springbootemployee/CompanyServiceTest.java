@@ -28,7 +28,7 @@ public class CompanyServiceTest {
     CompanyServiceImpl companyService;
 
     @Test
-    void should_return_2companies_when_get_companies_given_2companies(){
+    void should_return_2companies_when_get_companies_given_2companies() {
         //given
         List<Company> companies = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
@@ -40,7 +40,7 @@ public class CompanyServiceTest {
         List<CompanyResponse> companiesResult = companyService.getCompanies();
 
         //then
-        assertEquals(2,companiesResult.size());
+        assertEquals(2, companiesResult.size());
     }
 
     @Test

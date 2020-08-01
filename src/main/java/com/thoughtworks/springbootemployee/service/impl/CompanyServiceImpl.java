@@ -4,7 +4,6 @@ import com.thoughtworks.springbootemployee.dto.CompanyRequest;
 import com.thoughtworks.springbootemployee.dto.CompanyResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
@@ -32,21 +31,21 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     private List<CompanyResponse> companyResponseBoxed(List<Company> companies) {
-        if(companies != null){
+        if (companies != null) {
             return companies.stream().map(company -> {
                 CompanyResponse companyResponse = new CompanyResponse();
-                BeanUtils.copyProperties(company,companyResponse);
+                BeanUtils.copyProperties(company, companyResponse);
                 return companyResponse;
             }).collect(Collectors.toList());
         }
         return null;
     }
 
-    private CompanyResponse companyResponseBoxed(Company company){
-        if(company != null){
+    private CompanyResponse companyResponseBoxed(Company company) {
+        if (company != null) {
             CompanyResponse companyResponse = new CompanyResponse();
-            BeanUtils.copyProperties(company,companyResponse);
-            return  companyResponse;
+            BeanUtils.copyProperties(company, companyResponse);
+            return companyResponse;
         }
         return null;
     }
@@ -64,25 +63,25 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyResponse getEmployeeOfCompany(int id) {
         CompanyResponse companyResponse = new CompanyResponse();
         List<Employee> employees = companyRepository.findAllById(Collections.singleton(id))
-            .stream()
-            .map(Company::getEmployees)
-            .findFirst().orElse(null);
-         companyResponse.setEmployees(employees);
-         return companyResponse;
+                .stream()
+                .map(Company::getEmployees)
+                .findFirst().orElse(null);
+        companyResponse.setEmployees(employees);
+        return companyResponse;
     }
 
     public CompanyResponse addCompany(CompanyRequest companyRequest) {
         Company company = new Company();
-        BeanUtils.copyProperties(companyRequest,company);
+        BeanUtils.copyProperties(companyRequest, company);
         company = companyRepository.save(company);
         return companyResponseBoxed(company);
     }
 
-    public CompanyResponse updateCompany(int id,CompanyRequest companyRequest) {
-        Company company  = companyRepository.findById(id).orElse(null);
+    public CompanyResponse updateCompany(int id, CompanyRequest companyRequest) {
+        Company company = companyRepository.findById(id).orElse(null);
         CompanyResponse companyResponse = new CompanyResponse();
-        if(company != null){
-            BeanUtils.copyProperties(companyRequest,company);
+        if (company != null) {
+            BeanUtils.copyProperties(companyRequest, company);
             company = companyRepository.save(company);
         }
         return companyResponseBoxed(company);

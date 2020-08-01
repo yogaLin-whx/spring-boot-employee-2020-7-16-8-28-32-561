@@ -7,14 +7,11 @@ import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,10 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return null;
     }
-//
-//    public Employee addEmployee(Employee employee) {
-//        return employeeRepository.save(employee);
-//    }
 
 
     public List<EmployeeResponse> getEmployees(Pageable pageable) {
@@ -50,14 +43,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public EmployeeResponse getEmployeeById(int id) {
         Employee employee = employeeRepository.findById(id).orElse(null);
-        return new EmployeeResponse(employee.getName(),employee.getAge(),employee.getGender(),employee.getCompany().getName());
+        return new EmployeeResponse(employee.getName(), employee.getAge(), employee.getGender(), employee.getCompany().getName());
     }
 
-    public void updateEmployee(int id,EmployeeRequest employeeRequest)
-
-    {
+    public void updateEmployee(int id, EmployeeRequest employeeRequest) {
         Company company = companyRepository.findById(employeeRequest.getCompanyId()).orElse(null);
-        Employee employee = new Employee(id,employeeRequest.getName(),employeeRequest.getAge(),employeeRequest.getGender(),company);
+        Employee employee = new Employee(id, employeeRequest.getName(), employeeRequest.getAge(), employeeRequest.getGender(), company);
         employeeRepository.save(employee);
     }
 
@@ -68,8 +59,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public List<EmployeeResponse> getEmployeesByGender(String gender) {
         List<EmployeeResponse> employeeResponseList = new ArrayList<>();
-        employeeRepository.findByGender(gender).forEach(e->{
-            employeeResponseList.add(new EmployeeResponse(e.getName(),e.getAge(),e.getGender(),e.getCompany().getName()));
+        employeeRepository.findByGender(gender).forEach(e -> {
+            employeeResponseList.add(new EmployeeResponse(e.getName(), e.getAge(), e.getGender(), e.getCompany().getName()));
         });
         return employeeResponseList;
     }

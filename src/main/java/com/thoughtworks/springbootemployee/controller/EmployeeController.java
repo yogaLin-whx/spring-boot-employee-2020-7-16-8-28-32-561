@@ -21,13 +21,13 @@ public class EmployeeController {
     private EmployeeServiceImpl employeeService;
 
     @PostMapping()
-    public Employee addEmployee(@RequestBody EmployeeRequest employeeRequest){
+    public Employee addEmployee(@RequestBody EmployeeRequest employeeRequest) {
         return employeeService.addEmployee(employeeRequest);
     }
 
     @GetMapping()
     public List<EmployeeResponse> getEmployees(@PageableDefault Pageable pageable,
-                                               @RequestParam(value = "gender", required = false) String gender){
+                                               @RequestParam(value = "gender", required = false) String gender) {
         if (gender != null) {
             return employeeService.getEmployeesByGender(gender);
         }
@@ -35,17 +35,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public EmployeeResponse getEmployeeById(@PathVariable int id){
+    public EmployeeResponse getEmployeeById(@PathVariable int id) {
         return employeeService.getEmployeeById(id);
     }
 
     @PutMapping("/{id}")
-    public void updateEmployeeById(@PathVariable int id,@RequestBody EmployeeRequest employeeRequest){
-        employeeService.updateEmployee(id,employeeRequest);
+    public void updateEmployeeById(@PathVariable int id, @RequestBody EmployeeRequest employeeRequest) {
+        employeeService.updateEmployee(id, employeeRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmployeeById(@PathVariable("id")int id){
+    public void deleteEmployeeById(@PathVariable("id") int id) {
         employeeService.deleteEmployeeById(id);
     }
 }

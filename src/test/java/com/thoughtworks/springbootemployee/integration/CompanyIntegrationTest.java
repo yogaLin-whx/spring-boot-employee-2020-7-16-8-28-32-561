@@ -26,12 +26,12 @@ public class CompanyIntegrationTest {
     MockMvc mockMvc;
 
     @AfterEach
-    public void clear(){
+    public void clear() {
         companyRepository.deleteAll();
     }
 
     @BeforeEach
-    public  void clearBefore(){
+    public void clearBefore() {
         companyRepository.deleteAll();
     }
 
@@ -66,7 +66,7 @@ public class CompanyIntegrationTest {
 
     @Test
     void should_get_update_company_response_when_update_company_given_company_request_and_exist_company() throws Exception {
-        Company company  = new Company();
+        Company company = new Company();
         company.setName("oodl");
         company = companyRepository.save(company);
         String companyJson = "{\n" +
@@ -90,14 +90,13 @@ public class CompanyIntegrationTest {
 
     @Test
     void should_return_company_with_same_id_when_find_company_by_id_given_company() throws Exception {
-        Company  company = new Company();
+        Company company = new Company();
         company.setName("oodl");
         companyRepository.save(company);
 
         mockMvc.perform(get("/companies/" + company.getId()))
                 .andExpect(status().isOk());
     }
-
 
 
 }

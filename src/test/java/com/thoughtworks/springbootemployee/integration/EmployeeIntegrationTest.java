@@ -12,12 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -96,7 +91,7 @@ public class EmployeeIntegrationTest {
 
         //when
         mockMvc.perform(get("/employees")
-                .param("gender","female"))
+                .param("gender", "female"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("olivia"));
     }
@@ -112,8 +107,8 @@ public class EmployeeIntegrationTest {
 
         //when
         mockMvc.perform(get("/employees")
-                .param("page","1")
-                .param("size","2"))
+                .param("page", "1")
+                .param("size", "2"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("chris"));
     }
@@ -127,7 +122,7 @@ public class EmployeeIntegrationTest {
 
         //when
         mockMvc.perform(get("/employees")
-                .param("id","1"))
+                .param("id", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("oliver"));
     }
@@ -146,11 +141,11 @@ public class EmployeeIntegrationTest {
                 "    \"gender\":\"male\",\n" +
                 "    \"companyId\":1\n" +
                 "}";
-        mockMvc.perform(put("/employees"+"/"+save.getId())
+        mockMvc.perform(put("/employees" + "/" + save.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(employeeJson))
                 .andExpect(status().isOk());
-        mockMvc.perform(get("/employees"+"/"+save.getId()))
+        mockMvc.perform(get("/employees" + "/" + save.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("oliver"));
     }
@@ -163,7 +158,7 @@ public class EmployeeIntegrationTest {
         Employee save = employeeRepository.save(new Employee("oliver", 18, "male", company));
 
         //when
-        mockMvc.perform(delete("/employees"+"/"+save.getId()))
+        mockMvc.perform(delete("/employees" + "/" + save.getId()))
                 .andExpect(status().isOk());
 
     }

@@ -13,8 +13,8 @@ public class Company {
     @Column(name = "company_id")
     private int id;
 
-/*    @NotBlank
-    @Size(min = 0,max = 20)*/
+    /*    @NotBlank
+        @Size(min = 0,max = 20)*/
     private String name;
 
 
@@ -51,14 +51,5 @@ public class Company {
     }
 
     public Company() {
-    }
-
-    @Override
-    public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", employees=" + employees +
-                '}';
     }
 }

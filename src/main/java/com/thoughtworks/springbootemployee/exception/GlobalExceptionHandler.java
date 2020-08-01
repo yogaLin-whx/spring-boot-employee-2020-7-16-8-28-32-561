@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public @ResponseBody
-    List<String> handleValidationFailure(MethodArgumentNotValidException excetion){
+    List<String> handleValidationFailure(MethodArgumentNotValidException excetion) {
         return excetion
                 .getBindingResult()
                 .getFieldErrors()

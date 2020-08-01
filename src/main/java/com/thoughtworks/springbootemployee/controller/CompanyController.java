@@ -19,32 +19,32 @@ public class CompanyController {
     private CompanyServiceImpl companyService;
 
     @GetMapping("/{id}")
-    public CompanyResponse getCompanyById(@PathVariable int id){
-        return  companyService.getCompanyById(id);
+    public CompanyResponse getCompanyById(@PathVariable int id) {
+        return companyService.getCompanyById(id);
     }
 
     @GetMapping("/{id}/employees")
-    public CompanyResponse  getEmployeesOfCompany(@PathVariable int id){
-        return  companyService.getEmployeeOfCompany(id);
+    public CompanyResponse getEmployeesOfCompany(@PathVariable int id) {
+        return companyService.getEmployeeOfCompany(id);
     }
 
     @GetMapping()
     public List<CompanyResponse> getCompanies(@PageableDefault Pageable pageable,
-                                      @RequestParam(required = false, defaultValue = "false") boolean unpaged){
+                                              @RequestParam(required = false, defaultValue = "false") boolean unpaged) {
         if (unpaged) {
             return companyService.getCompanies();
         }
-        return  companyService.getCompanies(pageable);
+        return companyService.getCompanies(pageable);
     }
 
     @PostMapping()
-    public CompanyResponse addCompany(@RequestBody CompanyRequest companyRequest){
+    public CompanyResponse addCompany(@RequestBody CompanyRequest companyRequest) {
         return companyService.addCompany(companyRequest);
     }
 
     @PutMapping("/{id}")
-    public CompanyResponse updateCompanyById(@PathVariable int id,@RequestBody CompanyRequest companyRequest) {
-        return companyService.updateCompany(id,companyRequest);
+    public CompanyResponse updateCompanyById(@PathVariable int id, @RequestBody CompanyRequest companyRequest) {
+        return companyService.updateCompany(id, companyRequest);
     }
 
     @DeleteMapping("/{id}")
