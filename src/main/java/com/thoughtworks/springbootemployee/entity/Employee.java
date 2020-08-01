@@ -15,6 +15,14 @@ public class Employee {
     private int age;
     private String gender;
 
+    public Employee(int id, String name, int age, String gender, Company company) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.company = company;
+    }
+
     public Employee(String name, int age, String gender, Company company) {
         this.name = name;
         this.age = age;

@@ -15,11 +15,11 @@ public interface EmployeeService {
 
     List<EmployeeResponse> getEmployees(Pageable pageable);
 
-    List<Employee> getEmployeeById(int id);
+    EmployeeResponse getEmployeeById(int id);
 
-    void updateEmployee(Employee employee);
+    void updateEmployee(int id,EmployeeRequest employeeRequest);
 
-    void deleteEmployeeById(int id);
+    Boolean deleteEmployeeById(int id);
 
     List<EmployeeResponse> getEmployeesByGender(String gender);
 }

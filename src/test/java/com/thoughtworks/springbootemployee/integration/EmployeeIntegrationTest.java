@@ -12,7 +12,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -132,7 +137,7 @@ public class EmployeeIntegrationTest {
         //given
         Company company = new Company("oocl");
         companyRepository.save(company);
-        employeeRepository.save(new Employee("olivia", 18, "male", company));
+        Employee save = employeeRepository.save(new Employee("olivia", 18, "male", company));
 
         //when
         String employeeJson = "{\n" +
@@ -141,13 +146,27 @@ public class EmployeeIntegrationTest {
                 "    \"gender\":\"male\",\n" +
                 "    \"companyId\":1\n" +
                 "}";
-        mockMvc.perform(put("/employees")
+        mockMvc.perform(put("/employees"+"/"+save.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(employeeJson))
                 .andExpect(status().isOk());
-        mockMvc.perform(get("/employees")
-                .param("id","1"))
+        mockMvc.perform(get("/employees"+"/"+save.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("oliver"));
     }
+
+    @Test
+    void should_delete_when_delete_employess_given_1_employee() throws Exception {
+        //given
+        Company company = new Company("oocl");
+        companyRepository.save(company);
+        Employee save = employeeRepository.save(new Employee("oliver", 18, "male", company));
+
+        //when
+        mockMvc.perform(delete("/employees"+"/"+save.getId()))
+                .andExpect(status().isOk());
+
+    }
+
+
 }

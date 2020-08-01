@@ -39,13 +39,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public List<Employee> getEmployeeById(@PathVariable int id){
+    public EmployeeResponse getEmployeeById(@PathVariable int id){
         return employeeService.getEmployeeById(id);
     }
 
-    @PutMapping()
-    public void updateEmployeeById(@RequestBody Employee employee){
-        employeeService.updateEmployee(employee);
+    @PutMapping("/{id}")
+    public void updateEmployeeById(@PathVariable int id,@RequestBody EmployeeRequest employeeRequest){
+        employeeService.updateEmployee(id,employeeRequest);
     }
 
     @DeleteMapping("/{id}")

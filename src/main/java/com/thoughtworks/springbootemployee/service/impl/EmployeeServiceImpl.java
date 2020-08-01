@@ -48,16 +48,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeResponseList;
     }
 
-    public List<Employee> getEmployeeById(int id) {
-        return employeeRepository.findAllById(Collections.singleton(id));
+    public EmployeeResponse getEmployeeById(int id) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        return new EmployeeResponse(employee.getName(),employee.getAge(),employee.getGender(),employee.getCompany().getName());
     }
 
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(int id,EmployeeRequest employeeRequest)
+
+    {
+        Company company = companyRepository.findById(employeeRequest.getCompanyId()).orElse(null);
+        Employee employee = new Employee(id,employeeRequest.getName(),employeeRequest.getAge(),employeeRequest.getGender(),company);
         employeeRepository.save(employee);
     }
 
-    public void deleteEmployeeById(int id) {
+    public Boolean deleteEmployeeById(int id) {
         employeeRepository.deleteById(id);
+        return true;
     }
 
     public List<EmployeeResponse> getEmployeesByGender(String gender) {
