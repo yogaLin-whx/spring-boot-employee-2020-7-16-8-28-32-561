@@ -2,7 +2,7 @@ package com.thoughtworks.springbootemployee.dto;
 
 public class EmployeeRequest {
 
-    private int id;
+
     private String name;
     private int age;
     private String gender;
@@ -11,21 +11,13 @@ public class EmployeeRequest {
     public EmployeeRequest() {
     }
 
-    public EmployeeRequest(int id, String name, int age, String gender, int companyId) {
-        this.id = id;
+    public EmployeeRequest(String name, int age, String gender, int companyId) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.companyId = companyId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
