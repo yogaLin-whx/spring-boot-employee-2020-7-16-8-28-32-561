@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.dto.EmployeeRequest;
+import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import com.thoughtworks.springbootemployee.service.impl.EmployeeServiceImpl;
@@ -29,12 +30,12 @@ public class EmployeeController {
 //    }
 
     @GetMapping()
-    public List<Employee> getEmployees(@PageableDefault Pageable pageable,
-                                       @RequestParam(value = "gender", required = false) String gender){
+    public List<EmployeeResponse> getEmployees(@PageableDefault Pageable pageable,
+                                               @RequestParam(value = "gender", required = false) String gender){
         if (gender != null) {
             return employeeService.getEmployeesByGender(gender);
         }
-        return employeeService.getEmployees(pageable).getContent();
+        return employeeService.getEmployees(pageable);
     }
 
     @GetMapping("/{id}")
