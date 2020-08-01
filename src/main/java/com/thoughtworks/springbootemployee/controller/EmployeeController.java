@@ -24,10 +24,6 @@ public class EmployeeController {
     public Employee addEmployee(@RequestBody EmployeeRequest employeeRequest){
         return employeeService.addEmployee(employeeRequest);
     }
-//    @PostMapping()
-//    public Employee addEmployee(@RequestBody Employee employee){
-//        return employeeService.addEmployee(employee);
-//    }
 
     @GetMapping()
     public List<EmployeeResponse> getEmployees(@PageableDefault Pageable pageable,
