@@ -13,8 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -67,6 +66,16 @@ public class CompanyIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON).content(companyJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("oocl"));
+    }
+
+    @Test
+    void should_return_null_when_delete_company_given_company_id() throws Exception {
+        Company company = new Company();
+        company.setName("oodl");
+        companyRepository.save(company);
+
+        mockMvc.perform(delete("/companies/" + company.getId()))
+                .andExpect(status().isOk());
     }
 
 
