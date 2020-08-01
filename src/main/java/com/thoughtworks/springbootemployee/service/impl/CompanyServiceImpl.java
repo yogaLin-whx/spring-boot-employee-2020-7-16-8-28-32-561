@@ -58,6 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     public CompanyResponse updateCompany(int id,CompanyRequest companyRequest) {
         Company company  = companyRepository.findById(id).orElse(null);
+        System.out.println(company);
         BeanUtils.copyProperties(companyRequest,company);
         company = companyRepository.save(company);
         CompanyResponse companyResponse = new CompanyResponse();
