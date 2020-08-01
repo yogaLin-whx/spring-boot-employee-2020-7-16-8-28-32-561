@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee;
 
+import com.thoughtworks.springbootemployee.dto.CompanyResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
@@ -36,10 +37,10 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        List<Company> companiesResult = companyService.getCompanies();
+        CompanyResponse companiesResult = companyService.getCompanies();
 
         //then
-        assertEquals(2,companiesResult.size());
+        assertEquals(2,companiesResult.getCompanies().size());
     }
 
     @Test
@@ -49,23 +50,23 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        List<Company> companiesResult = companyService.getCompanies();
+        CompanyResponse companiesResult = companyService.getCompanies();
 
         //then
-        assertEquals(0, companiesResult.size());
+        assertEquals(0, companiesResult.getCompanies().size());
     }
 
     @Test
-    void should_return_0companies_when_get_company_by_id_given_company_id1_and_companies_do_not_have_company_with_id1() {
+    void should_return_0companies_when_get_company_by_id_given_companies_do_not_have_company_with_id1() {
         //given
         int companyId = 1;
         Mockito.when(companyRepository.findAllById(Collections.singleton(companyId))).thenReturn(null);
 
         //when
-        List<Company> companyResult = companyService.getCompanyById(companyId);
+        CompanyResponse companyResult = companyService.getCompanyById(companyId);
 
         //then
-        assertNull(companyResult);
+        assertEquals(0,companyResult.getCompanies().size());
     }
 
     @Test

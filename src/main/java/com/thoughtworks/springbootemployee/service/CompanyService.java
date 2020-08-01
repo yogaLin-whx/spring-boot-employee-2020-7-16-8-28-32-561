@@ -2,24 +2,22 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.dto.CompanyRequest;
 import com.thoughtworks.springbootemployee.dto.CompanyResponse;
-import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface CompanyService {
 
-    Page<Company> getCompanies(Pageable pageable);
+    CompanyResponse getCompanies(Pageable pageable);
 
-    List<Company> getCompanyById(int id);
+    CompanyResponse getCompanyById(int id);
 
     List<Employee> getEmployeeOfCompany(int id);
 
     CompanyResponse addCompany(CompanyRequest companyRequest);
 
-    void updateCompany(Company company);
+    CompanyResponse updateCompany(int id,CompanyRequest companyRequest);
 
     void deleteCompanyById(int id);
 }

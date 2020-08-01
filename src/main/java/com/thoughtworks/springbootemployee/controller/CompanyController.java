@@ -2,13 +2,11 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.dto.CompanyRequest;
 import com.thoughtworks.springbootemployee.dto.CompanyResponse;
-import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +19,7 @@ public class CompanyController {
     private CompanyServiceImpl companyService;
 
     @GetMapping("/{id}")
-    public List<Company> getCompanyById(@PathVariable int id){
+    public CompanyResponse getCompanyById(@PathVariable int id){
         return  companyService.getCompanyById(id);
     }
 
@@ -31,12 +29,12 @@ public class CompanyController {
     }
 
     @GetMapping()
-    public List<Company> getCompanies(@PageableDefault Pageable pageable,
+    public CompanyResponse getCompanies(@PageableDefault Pageable pageable,
                                       @RequestParam(required = false, defaultValue = "false") boolean unpaged){
         if (unpaged) {
             return companyService.getCompanies();
         }
-        return  companyService.getCompanies(pageable).getContent();
+        return  companyService.getCompanies(pageable);
     }
 
     @PostMapping()
@@ -44,9 +42,9 @@ public class CompanyController {
         return companyService.addCompany(companyRequest);
     }
 
-    @PutMapping()
-    public void updateCompanyById(@RequestBody Company company) {
-        companyService.updateCompany(company);
+    @PutMapping("/{id}")
+    public CompanyResponse updateCompanyById(@PathVariable int id,@RequestBody CompanyRequest companyRequest) {
+        return companyService.updateCompany(id,companyRequest);
     }
 
     @DeleteMapping("/{id}")
