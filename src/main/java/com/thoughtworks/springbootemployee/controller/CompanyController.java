@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.dto.CompanyRequest;
+import com.thoughtworks.springbootemployee.dto.CompanyResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
@@ -39,7 +40,7 @@ public class CompanyController {
     }
 
     @PostMapping()
-    public  Company  addCompany(@RequestBody CompanyRequest companyRequest){
+    public CompanyResponse addCompany(@RequestBody CompanyRequest companyRequest){
         return companyService.addCompany(companyRequest);
     }
 

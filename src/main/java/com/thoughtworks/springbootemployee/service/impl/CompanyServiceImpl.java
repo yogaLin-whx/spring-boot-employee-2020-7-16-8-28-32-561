@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.dto.CompanyRequest;
+import com.thoughtworks.springbootemployee.dto.CompanyResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
@@ -46,10 +47,13 @@ public class CompanyServiceImpl implements CompanyService {
                 .orElseThrow(CompanyNotFoundException::new);
     }
 
-    public Company addCompany(CompanyRequest companyRequest) {
+    public CompanyResponse addCompany(CompanyRequest companyRequest) {
         Company company = new Company();
         BeanUtils.copyProperties(companyRequest,company);
-        return companyRepository.save(company);
+        company = companyRepository.save(company);
+        CompanyResponse companyResponse = new CompanyResponse();
+        BeanUtils.copyProperties(company,companyResponse);
+        return companyResponse;
     }
 
     public void updateCompany(Company company) {
