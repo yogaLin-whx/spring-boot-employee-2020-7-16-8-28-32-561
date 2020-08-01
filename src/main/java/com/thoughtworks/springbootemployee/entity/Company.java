@@ -19,7 +19,7 @@ public class Company {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",cascade = CascadeType.REMOVE)
     private List<Employee> employees;
 
     public int getId() {

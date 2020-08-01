@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS company;
+CREATE TABLE company(
+    company_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(20)
+);
