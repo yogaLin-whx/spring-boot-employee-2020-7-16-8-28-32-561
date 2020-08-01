@@ -94,6 +94,6 @@ public class CompanyServiceImpl implements CompanyService {
                 .peek(employee -> employee.setCompany(null))
                 .collect(Collectors.toList());
         companyRepository.deleteById(id);
-        return  new CompanyResponse();
+        return new CompanyResponse();
     }
 }
