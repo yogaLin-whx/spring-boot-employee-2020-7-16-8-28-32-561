@@ -19,7 +19,7 @@ public interface CompanyService {
 
     CompanyResponse addCompany(CompanyRequest companyRequest);
 
-    void updateCompany(Company company);
+    CompanyResponse updateCompany(int id,CompanyRequest companyRequest);
 
     void deleteCompanyById(int id);
 }
