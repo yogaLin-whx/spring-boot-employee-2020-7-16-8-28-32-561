@@ -1,19 +1,27 @@
 package com.thoughtworks.springbootemployee.dto;
 
-import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyResponse {
 
-    private List<Company> companies = new ArrayList<>();
+    private String name;
+    private List<Employee> employees;
 
-    public List<Company> getCompanies() {
-        return companies;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

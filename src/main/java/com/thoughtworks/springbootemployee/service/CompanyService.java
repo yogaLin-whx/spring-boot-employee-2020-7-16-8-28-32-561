@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CompanyService {
 
-    CompanyResponse getCompanies(Pageable pageable);
+    List<CompanyResponse> getCompanies(Pageable pageable);
 
     CompanyResponse getCompanyById(int id);
 

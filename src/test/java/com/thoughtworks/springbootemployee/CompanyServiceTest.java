@@ -37,10 +37,10 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        CompanyResponse companiesResult = companyService.getCompanies();
+        List<CompanyResponse> companiesResult = companyService.getCompanies();
 
         //then
-        assertEquals(2,companiesResult.getCompanies().size());
+        assertEquals(2,companiesResult.size());
     }
 
     @Test
@@ -50,23 +50,22 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        CompanyResponse companiesResult = companyService.getCompanies();
+        List<CompanyResponse> companiesResult = companyService.getCompanies();
 
         //then
-        assertEquals(0, companiesResult.getCompanies().size());
+        assertEquals(0, companiesResult.size());
     }
 
     @Test
     void should_return_0companies_when_get_company_by_id_given_companies_do_not_have_company_with_id1() {
         //given
         int companyId = 1;
-        Mockito.when(companyRepository.findAllById(Collections.singleton(companyId))).thenReturn(null);
 
         //when
         CompanyResponse companyResult = companyService.getCompanyById(companyId);
 
         //then
-        assertEquals(0,companyResult.getCompanies().size());
+        assertNull(companyResult);
     }
 
     @Test

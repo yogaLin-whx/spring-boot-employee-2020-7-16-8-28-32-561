@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,28 +26,39 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public CompanyResponse getCompanies() {
+    public List<CompanyResponse> getCompanies() {
         List<Company> companies = companyRepository.findAll();
         return companyResponseBoxed(companies);
     }
 
-    private CompanyResponse companyResponseBoxed(List<Company> companies) {
-        CompanyResponse companyResponse = new CompanyResponse();
+    private List<CompanyResponse> companyResponseBoxed(List<Company> companies) {
         if(companies != null){
-            companies.forEach(company -> companyResponse.getCompanies().add(company));
+            return companies.stream().map(company -> {
+                CompanyResponse companyResponse = new CompanyResponse();
+                BeanUtils.copyProperties(company,companyResponse);
+                return companyResponse;
+            }).collect(Collectors.toList());
         }
-        return companyResponse;
+        return null;
+    }
+
+    private CompanyResponse companyResponseBoxed(Company company){
+        if(company != null){
+            CompanyResponse companyResponse = new CompanyResponse();
+            BeanUtils.copyProperties(company,companyResponse);
+            return  companyResponse;
+        }
+        return null;
     }
 
 
-    public CompanyResponse getCompanies(Pageable pageable) {
+    public List<CompanyResponse> getCompanies(Pageable pageable) {
         List<Company> companies = companyRepository.findAll(pageable).toList();
         return companyResponseBoxed(companies);
     }
 
     public CompanyResponse getCompanyById(int id) {
-        List<Company> companies =  companyRepository.findAllById(Collections.singleton(id));
-        return companyResponseBoxed(companies);
+        return companyResponseBoxed(companyRepository.findById(id).orElse(null));
     }
 
     public List<Employee> getEmployeeOfCompany(int id) {
@@ -63,9 +73,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = new Company();
         BeanUtils.copyProperties(companyRequest,company);
         company = companyRepository.save(company);
-        List<Company> companies = new ArrayList<>();
-        companies.add(company);
-        return companyResponseBoxed(companies);
+        return companyResponseBoxed(company);
     }
 
     public CompanyResponse updateCompany(int id,CompanyRequest companyRequest) {
@@ -75,9 +83,7 @@ public class CompanyServiceImpl implements CompanyService {
             BeanUtils.copyProperties(companyRequest,company);
             company = companyRepository.save(company);
         }
-        List<Company> companies = new ArrayList<>();
-        companies.add(company);
-        return companyResponseBoxed(companies);
+        return companyResponseBoxed(company);
     }
 
     public void deleteCompanyById(int id) {
