@@ -2,7 +2,6 @@ package com.thoughtworks.springbootemployee.integration;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -41,6 +41,16 @@ public class CompanyIntegrationTest {
         mockMvc.perform(get("/companies"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("ooocl"));
+    }
+
+    @Test
+    void should_get_2_company_when_find_all_companies_given_2companies() throws Exception {
+        companyRepository.save(new Company("oocl"));
+        companyRepository.save(new Company("ooocl"));
+        mockMvc.perform(get("/companies"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("oocl"))
+                .andExpect(jsonPath("[1].name").value("ooocl"));
     }
 
     @Test
