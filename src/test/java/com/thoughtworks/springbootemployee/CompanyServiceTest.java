@@ -79,7 +79,7 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAllById(Collections.singleton(companyId))).thenReturn(companies);
 
         //when
-        List<Employee> employees = companyService.getEmployeeOfCompany(companyId);
+        List<Employee> employees = companyService.getEmployeeOfCompany(companyId).getEmployees();
 
         //then
         assertNotNull(employees);

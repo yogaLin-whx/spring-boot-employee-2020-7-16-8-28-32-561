@@ -24,7 +24,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}/employees")
-    public List<Employee>  getEmployeesOfCompany(@PathVariable int id){
+    public CompanyResponse  getEmployeesOfCompany(@PathVariable int id){
         return  companyService.getEmployeeOfCompany(id);
     }
 

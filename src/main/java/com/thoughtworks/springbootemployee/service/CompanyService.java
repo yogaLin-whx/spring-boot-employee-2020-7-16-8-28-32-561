@@ -13,7 +13,7 @@ public interface CompanyService {
 
     CompanyResponse getCompanyById(int id);
 
-    List<Employee> getEmployeeOfCompany(int id);
+    CompanyResponse getEmployeeOfCompany(int id);
 
     CompanyResponse addCompany(CompanyRequest companyRequest);
 

@@ -61,12 +61,14 @@ public class CompanyServiceImpl implements CompanyService {
         return companyResponseBoxed(companyRepository.findById(id).orElse(null));
     }
 
-    public List<Employee> getEmployeeOfCompany(int id) {
-        return companyRepository.findAllById(Collections.singleton(id))
-                .stream()
-                .map(Company::getEmployees)
-                .findAny()
-                .orElseThrow(CompanyNotFoundException::new);
+    public CompanyResponse getEmployeeOfCompany(int id) {
+        CompanyResponse companyResponse = new CompanyResponse();
+        List<Employee> employees = companyRepository.findAllById(Collections.singleton(id))
+            .stream()
+            .map(Company::getEmployees)
+            .findFirst().orElse(null);
+         companyResponse.setEmployees(employees);
+         return companyResponse;
     }
 
     public CompanyResponse addCompany(CompanyRequest companyRequest) {
@@ -87,7 +89,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     public CompanyResponse deleteCompanyById(int id) {
-        List<Employee> companies = getEmployeeOfCompany(id)
+        List<Employee> companies = getEmployeeOfCompany(id).getEmployees()
                 .stream()
                 .peek(employee -> employee.setCompany(null))
                 .collect(Collectors.toList());
