@@ -45,8 +45,8 @@ public class CompanyServiceImpl implements CompanyService {
                 .orElseThrow(CompanyNotFoundException::new);
     }
 
-    public void addCompany(Company company) {
-        companyRepository.save(company);
+    public Company addCompany(Company company) {
+        return companyRepository.save(company);
     }
 
     public void updateCompany(Company company) {

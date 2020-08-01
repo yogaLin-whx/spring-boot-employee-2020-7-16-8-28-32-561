@@ -18,7 +18,7 @@ public interface CompanyService {
 
     List<Employee> getEmployeeOfCompany(int id);
 
-    void addCompany(Company company);
+    Company addCompany(Company company);
 
     void updateCompany(Company company);
 

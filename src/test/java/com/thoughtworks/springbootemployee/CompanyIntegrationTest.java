@@ -46,6 +46,7 @@ public class CompanyIntegrationTest {
         mockMvc.perform(post("/companies")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(companyJson))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("oodl"));
     }
 
