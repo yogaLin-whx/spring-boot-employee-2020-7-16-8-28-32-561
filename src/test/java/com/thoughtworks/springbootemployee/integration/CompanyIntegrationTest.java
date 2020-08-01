@@ -48,11 +48,10 @@ public class CompanyIntegrationTest {
     @Test
     void should_get_1_company_when_add_companies_given_1company() throws Exception {
         String companyJson = "{\n" +
-                "    \"name\": \"oodl\"\n" +
+                "    \"name\":\"oodl\" \n" +
                 "}";
         mockMvc.perform(post("/companies")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(companyJson))
+                .contentType(MediaType.APPLICATION_JSON).content(companyJson))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("oodl"));
     }
