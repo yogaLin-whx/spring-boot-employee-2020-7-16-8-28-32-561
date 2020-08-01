@@ -113,4 +113,18 @@ public class EmployeeIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("chris"));
     }
+
+    @Test
+    void should_get_id_is_1_employee_when_select_employess_by_id_1_given_1_employee() throws Exception {
+        //given
+        Company company = new Company("oocl");
+        companyRepository.save(company);
+        employeeRepository.save(new Employee("oliver", 18, "male", company));
+
+        //when
+        mockMvc.perform(get("/employees")
+                .param("id","1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("oliver"));
+    }
 }
