@@ -86,11 +86,12 @@ public class CompanyServiceImpl implements CompanyService {
         return companyResponseBoxed(company);
     }
 
-    public void deleteCompanyById(int id) {
+    public CompanyResponse deleteCompanyById(int id) {
         List<Employee> companies = getEmployeeOfCompany(id)
                 .stream()
                 .peek(employee -> employee.setCompany(null))
                 .collect(Collectors.toList());
         companyRepository.deleteById(id);
+        return  new CompanyResponse();
     }
 }

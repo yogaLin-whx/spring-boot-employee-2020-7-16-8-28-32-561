@@ -19,5 +19,5 @@ public interface CompanyService {
 
     CompanyResponse updateCompany(int id,CompanyRequest companyRequest);
 
-    void deleteCompanyById(int id);
+    CompanyResponse deleteCompanyById(int id);
 }

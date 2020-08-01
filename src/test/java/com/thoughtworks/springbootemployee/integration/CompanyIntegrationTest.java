@@ -85,7 +85,8 @@ public class CompanyIntegrationTest {
         companyRepository.save(company);
 
         mockMvc.perform(delete("/companies/" + company.getId()))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value(null));
     }
 
     @Test
