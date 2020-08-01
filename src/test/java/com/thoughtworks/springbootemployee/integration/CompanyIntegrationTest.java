@@ -1,8 +1,10 @@
-package com.thoughtworks.springbootemployee;
+package com.thoughtworks.springbootemployee.integration;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,6 +29,11 @@ public class CompanyIntegrationTest {
 
     @AfterEach
     public void clear(){
+        companyRepository.deleteAll();
+    }
+
+    @BeforeEach
+    public  void clearBefore(){
         companyRepository.deleteAll();
     }
 
