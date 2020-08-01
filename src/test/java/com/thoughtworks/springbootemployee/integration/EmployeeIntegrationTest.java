@@ -96,4 +96,21 @@ public class EmployeeIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("olivia"));
     }
+
+    @Test
+    void should_get_page2_employees_when_select_all_page2_employess_given_3_employees() throws Exception {
+        //given
+        Company company = new Company("oocl");
+        companyRepository.save(company);
+        employeeRepository.save(new Employee("oliver", 18, "male", company));
+        employeeRepository.save(new Employee("olivia", 18, "female", company));
+        employeeRepository.save(new Employee("chris", 18, "male", company));
+
+        //when
+        mockMvc.perform(get("/employees")
+                .param("page","1")
+                .param("size","2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("chris"));
+    }
 }
