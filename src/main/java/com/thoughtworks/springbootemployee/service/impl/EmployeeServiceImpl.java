@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public List<EmployeeResponse> getEmployees(Pageable pageable) {
         List<EmployeeResponse> employeeResponseList = new ArrayList<>();
-        employeeRepository.findAll(pageable).toList().stream().forEach(e -> {
+        employeeRepository.findAll(pageable).toList().forEach(e -> {
             employeeResponseList.add(new EmployeeResponse(e.getName(), e.getAge(), e.getGender(), e.getCompany().getName()));
         });
         return employeeResponseList;
@@ -62,7 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public List<EmployeeResponse> getEmployeesByGender(String gender) {
         List<EmployeeResponse> employeeResponseList = new ArrayList<>();
-        BeanUtils.copyProperties(employeeRepository.findByGender(gender),employeeResponseList);
+        employeeRepository.findByGender(gender).forEach(e->{
+            employeeResponseList.add(new EmployeeResponse(e.getName(),e.getAge(),e.getGender(),e.getCompany().getName()));
+        });
         return employeeResponseList;
     }
 }

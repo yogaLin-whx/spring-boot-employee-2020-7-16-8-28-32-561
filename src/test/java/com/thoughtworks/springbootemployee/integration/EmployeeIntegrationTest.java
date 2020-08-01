@@ -81,4 +81,19 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("[0].name").value("oliver"))
                 .andExpect(jsonPath("[1].name").value("chris"));
     }
+
+    @Test
+    void should_get_female_employees_when_select_all_female_employess_given_2_employees() throws Exception {
+        //given
+        Company company = new Company("oocl");
+        companyRepository.save(company);
+        employeeRepository.save(new Employee("oliver", 18, "male", company));
+        employeeRepository.save(new Employee("olivia", 18, "female", company));
+
+        //when
+        mockMvc.perform(get("/employees")
+                .param("gender","female"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("olivia"));
+    }
 }
