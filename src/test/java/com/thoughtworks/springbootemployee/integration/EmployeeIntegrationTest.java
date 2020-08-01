@@ -13,8 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -126,5 +125,29 @@ public class EmployeeIntegrationTest {
                 .param("id","1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[0].name").value("oliver"));
+    }
+
+    @Test
+    void should_get_name_is_oliver_when_update_employess_name_given_1_employee_name_olivia() throws Exception {
+        //given
+        Company company = new Company("oocl");
+        companyRepository.save(company);
+        employeeRepository.save(new Employee("olivia", 18, "male", company));
+
+        //when
+        String employeeJson = "{\n" +
+                "    \"name\":\"oliver\",\n" +
+                "    \"age\":18,\n" +
+                "    \"gender\":\"male\",\n" +
+                "    \"companyId\":1\n" +
+                "}";
+        mockMvc.perform(put("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(employeeJson))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/employees")
+                .param("id","1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("oliver"));
     }
 }
