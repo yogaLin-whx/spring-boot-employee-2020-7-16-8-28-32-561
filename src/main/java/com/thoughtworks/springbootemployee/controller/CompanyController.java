@@ -30,12 +30,12 @@ public class CompanyController {
     }
 
     @GetMapping()
-    public List<Company> getCompanies(@PageableDefault Pageable pageable,
+    public List<CompanyResponse> getCompanies(@PageableDefault Pageable pageable,
                                       @RequestParam(required = false, defaultValue = "false") boolean unpaged){
         if (unpaged) {
             return companyService.getCompanies();
         }
-        return  companyService.getCompanies(pageable).getContent();
+        return  companyService.getCompanies(pageable);
     }
 
     @PostMapping()

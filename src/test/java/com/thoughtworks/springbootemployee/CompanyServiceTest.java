@@ -37,7 +37,7 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        List<Company> companiesResult = companyService.getCompanies();
+        List<CompanyResponse> companiesResult = companyService.getCompanies();
 
         //then
         assertEquals(2,companiesResult.size());
@@ -50,7 +50,7 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        List<Company> companiesResult = companyService.getCompanies();
+        List<CompanyResponse> companiesResult = companyService.getCompanies();
 
         //then
         assertEquals(0, companiesResult.size());

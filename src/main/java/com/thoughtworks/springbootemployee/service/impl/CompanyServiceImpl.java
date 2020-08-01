@@ -27,12 +27,20 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public List<Company> getCompanies() {
-        return companyRepository.findAll();
+    public List<CompanyResponse> getCompanies() {
+        return companyRepository.findAll().stream().map(company -> {
+            CompanyResponse companyResponse = new CompanyResponse();
+            BeanUtils.copyProperties(company,companyResponse);
+            return companyResponse;
+        }).collect(Collectors.toList());
     }
 
-    public Page<Company> getCompanies(Pageable pageable) {
-        return companyRepository.findAll(pageable);
+    public List<CompanyResponse> getCompanies(Pageable pageable) {
+        return companyRepository.findAll(pageable).toList().stream().map(company -> {
+            CompanyResponse companyResponse = new CompanyResponse();
+            BeanUtils.copyProperties(company,companyResponse);
+            return companyResponse;
+        }).collect(Collectors.toList());
     }
 
     public List<CompanyResponse> getCompanyById(int id) {
