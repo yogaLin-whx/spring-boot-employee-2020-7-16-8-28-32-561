@@ -69,7 +69,7 @@ public class CompanyIntegrationTest {
     }
 
     @Test
-    void should_return_null_when_delete_company_given_company_id() throws Exception {
+    void should_return_null_when_delete_company_given_company_id_with_exist_company() throws Exception {
         Company company = new Company();
         company.setName("oodl");
         companyRepository.save(company);
@@ -79,7 +79,7 @@ public class CompanyIntegrationTest {
     }
 
     @Test
-    void should_return_company_with_same_id_when_find_company_by_id_given_company_with_id_and_exist_company() throws Exception {
+    void should_return_company_with_same_id_when_find_company_by_id_given_company() throws Exception {
         Company  company = new Company();
         company.setName("oodl");
         companyRepository.save(company);
